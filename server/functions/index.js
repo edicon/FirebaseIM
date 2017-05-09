@@ -2,6 +2,11 @@ let functions = require('firebase-functions');
 let admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
+exports.helloWorld = functions.https.onRequest((request, response) => {
+ response.send("Hello from Firebase!");
+});
+
+// https://android.jlelse.eu/serverless-notifications-with-cloud-functions-for-firebase-685d7c327cd4
 exports.sendNotification = functions.database.ref('/notifications/messages/{pushId}')
     .onWrite(event => {
         const message = event.data.current.val();
